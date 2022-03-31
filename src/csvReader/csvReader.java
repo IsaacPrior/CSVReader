@@ -1,8 +1,8 @@
 package csvReader;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class csvReader {
@@ -19,7 +19,7 @@ public class csvReader {
 
 	public static void main(String[] args) {
 		//Initial Values
-		String csvFile = "testCSV.csv";
+		String csvFile = "CSVFile.csv";
 		
 		//Array to store lists of results
 		Object[][] list = new Object[3][6];
@@ -50,11 +50,21 @@ public class csvReader {
 			
 			//Closing Scanner
 			sc.close();
-		} catch(Exception e) {
+			
+		//Error Handling
+		} catch(FileNotFoundException e) {
+			System.out.println("File Not Found");
+		}catch (NoSuchElementException e) { 
+			System.out.println("File is Empty");
+		} catch (NullPointerException e) {
+			System.out.println("Invalid data in file");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Invalid data in file");
+		} catch (NumberFormatException e) {
+			System.out.println("Invalid data in file");
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 
 	}
