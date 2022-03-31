@@ -1,6 +1,7 @@
 package csvReader;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -10,12 +11,15 @@ public class csvReader {
 		//Initial Values
 		String csvFile = "testCSV.csv";
 		
+		//Object Array for temporary storage of results
 		Object[] records = new Object[6];
+		
+		//Arraylist to store lists of results
+		ArrayList<Object[]> list = new ArrayList<Object[]>();
 		
 		//File Reader
 		try {
 			Scanner sc = new Scanner(new File(csvFile));
-			//sc.useDelimiter(",");
 			
 			//Skipping Header
 			sc.nextLine();
@@ -24,11 +28,14 @@ public class csvReader {
 				//Adding current line of CSV to array
 				records = sc.nextLine().split(",");
 				
-				//Temporary print for verification
-				System.out.println(Arrays.toString(records));
-
+				//Adding retrieved results to arraylist
+				list.add(records);
 			}
 			
+			//Temporary print for verification
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(Arrays.toString(list.get(i)));
+			}
 			
 			
 			sc.close();
