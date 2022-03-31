@@ -10,12 +10,19 @@ public class csvReader {
 	public static void main(String[] args) {
 		//Initial Values
 		String csvFile = "testCSV.csv";
+		int firstDiv = 0;
+		int secondDiv = 0;
+		int thirdDiv = 0;
+		
+		int firstPoint = 0;
+		int secondPoint = 0;
+		int thirdPoint = 0;
 		
 		//Object Array for temporary storage of results
 		Object[] records = new Object[6];
 		
-		//Arraylist to store lists of results
-		ArrayList<Object[]> list = new ArrayList<Object[]>();
+		//Array to store lists of results
+		Object[] list = new Object[3];
 		
 		//File Reader
 		try {
@@ -28,16 +35,29 @@ public class csvReader {
 				//Adding current line of CSV to array
 				records = sc.nextLine().split(",");
 				
-				//Adding retrieved results to arraylist
-				list.add(records);
+				//Retrieving division and point values for comparison
+				int division = Integer.valueOf(records[3].toString());
+				int points = Integer.valueOf(records[4].toString());
+				
+				//Adding top 3 values to array
+				if (division >= firstDiv && points > firstPoint) {
+					list[0] = records;
+					firstDiv = division;
+					firstPoint = points;
+				} else if (division >= secondDiv && points > secondPoint) {
+					list[1] = records;
+					secondDiv = division;
+					secondPoint = points;
+				} else if (division >= thirdDiv && points > thirdPoint) {
+					list[2] = records;
+					thirdDiv = division;
+					thirdPoint = points;
+				}
+				
 			}
 			
-			//Temporary print for verification
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(Arrays.toString(list.get(i)));
-			}
 			
-			
+			//Closing Scanner
 			sc.close();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -49,3 +69,5 @@ public class csvReader {
 	}
 
 }
+
+
